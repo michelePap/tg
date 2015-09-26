@@ -1,11 +1,7 @@
 import tgl
-import pprint
 from functools import partial
 
-
 our_id = 0
-pp = pprint.PrettyPrinter(indent=4)
-
 binlog_done = False;
 
 def on_binlog_replay_end():
@@ -19,8 +15,7 @@ def on_our_id(id):
     return "Set ID: " + str(our_id)
 
 def msg_cb(success, msg):
-    pp.pprint(success)
-    pp.pprint(msg)
+    pass
 
 HISTORY_QUERY_SIZE = 100
 
@@ -44,7 +39,6 @@ def on_msg_receive(msg):
     else: # chatroom
       peer = msg.dest
 
-    pp.pprint(msg)
     if msg.text.startswith("!ping"):
       peer.send_msg("PONG! google.com", preview=False, reply=msg.id)
 
@@ -52,10 +46,10 @@ def on_msg_receive(msg):
 def on_secret_chat_update(peer, types):
     return "on_secret_chat_update"
 
-def on_user_update():
+def on_user_update(peer, what_changed):
     pass
 
-def on_chat_update():
+def on_chat_update(peer, what_changed):
     pass
 
 # Set callbacks
